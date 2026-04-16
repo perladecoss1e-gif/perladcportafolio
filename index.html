@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio – Cultura Digital 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose-light:   #fce4ec;
+      --rose-mid:     #f48fb1;
+      --rose-deep:    #e91e8c;
+      --rose-blush:   #ffd6e7;
+      --lilac:        #c5a3e8;
+      --lilac-light:  #ede0ff;
+      --lilac-deep:   #9c6bc4;
+      --white:        #ffffff;
+      --ink:          #1a1a2e;
+      --ink-soft:     #4a4a6a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--lilac-light);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 20% 30%, #f9a8d4 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, #fbc8dd 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 10%, #e879a0 0%, transparent 45%),
+        linear-gradient(160deg, #fce4ec 0%, #f8bbd0 40%, #fce4ec 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative petals */
+    .cover::before, .cover::after {
+      content: '';
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      opacity: .18;
+    }
+    .cover::before {
+      width: 420px; height: 420px;
+      background: var(--rose-deep);
+      top: -120px; left: -120px;
+      transform: rotate(-30deg);
+    }
+    .cover::after {
+      width: 340px; height: 340px;
+      background: var(--lilac-deep);
+      bottom: -100px; right: -80px;
+      transform: rotate(20deg);
+    }
+
+    /* Floating circles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(233,30,140,.12);
+      animation: float 6s ease-in-out infinite;
+    }
+    .b1 { width:80px;  height:80px;  top:15%;  left:8%;   animation-delay:0s;   }
+    .b2 { width:50px;  height:50px;  top:65%;  left:5%;   animation-delay:2s;   background:rgba(156,107,196,.15); }
+    .b3 { width:110px; height:110px; top:25%;  right:7%;  animation-delay:1s;   }
+    .b4 { width:60px;  height:60px;  bottom:20%; right:12%; animation-delay:3s; background:rgba(156,107,196,.12); }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0);    }
+      50%      { transform: translateY(-18px); }
+    }
+
+    .cover-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .label-portfolio {
+      font-family: 'Raleway', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      background: rgba(255,255,255,.55);
+      padding: 5px 18px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5.8rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -.02em;
+      text-shadow: 0 4px 24px rgba(233,30,140,.18);
+    }
+    .title-main span { color: var(--rose-deep); }
+
+    .label-specialty {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--lilac-deep);
+      margin-top: 4px;
+    }
+
+    .divider-rose {
+      width: 80px; height: 3px;
+      background: linear-gradient(90deg, var(--rose-mid), var(--lilac-deep));
+      border-radius: 3px;
+      margin: 6px auto;
+    }
+
+    .author {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: var(--ink-soft);
+    }
+    .author span { color: var(--rose-deep); font-weight: 600; }
+
+    /* Social bar */
+    .social-bar {
+      display: flex;
+      gap: 18px;
+      margin-top: 22px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      transition: transform .25s, box-shadow .25s;
+      backdrop-filter: blur(6px);
+    }
+    .social-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
+
+    .social-link.fb {
+      background: rgba(24,119,242,.15);
+      color: #1877f2;
+      border: 2px solid rgba(24,119,242,.3);
+    }
+    .social-link.ig {
+      background: rgba(225,48,108,.12);
+      color: #e1306c;
+      border: 2px solid rgba(225,48,108,.3);
+    }
+
+    .social-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ─── CARDS SECTION ─── */
+    .cards-section {
+      background: linear-gradient(180deg, var(--lilac) 0%, var(--lilac-light) 100%);
+      padding: 70px 24px 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--ink);
+    }
+    .section-header p {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      margin-top: 8px;
+      letter-spacing: .05em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: 0 6px 30px rgba(156,107,196,.18);
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(156,107,196,.28);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px 20px 0 0;
+      flex-shrink: 0;
+      height: 180px;
+    }
+    .card-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55px;
+      background: linear-gradient(to top, var(--white), transparent);
+      pointer-events: none;
+    }
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .card:hover .card-img { transform: scale(1.07); }
+
+    .card-body {
+      padding: 14px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--rose-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-top: -28px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 14px rgba(233,30,140,.2);
+      border: 3px solid var(--white);
+    }
+
+    .card-num {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--rose-deep);
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: .83rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .btn-ver {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--rose-deep), var(--lilac-deep));
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: opacity .25s, transform .25s;
+    }
+    .btn-ver:hover { opacity: .88; transform: scale(1.03); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: linear-gradient(135deg, #2d1b4e, #4a1942);
+      color: rgba(255,255,255,.85);
+      padding: 50px 24px 30px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--rose-mid);
+      margin-bottom: 18px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .footer-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .footer-item .fi-label {
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rose-mid);
+      font-weight: 700;
+    }
+    .footer-item .fi-value {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .footer-divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--rose-mid), var(--lilac));
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+
+    .footer-copy {
+      font-size: .75rem;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 480px) {
+      .social-bar { gap: 12px; }
+      .social-link { padding: 8px 16px; font-size: .78rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PORTADA -->
+  <header class="cover">
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+
+    <div class="cover-content">
+      <span class="label-portfolio">✦ Portafolio ✦</span>
+
+      <h1 class="title-main">Cultura <span>Digital</span> 2</h1>
+
+      <p class="label-specialty">Inteligencia Artificial</p>
+
+      <div class="divider-rose"></div>
+
+      <p class="author">by <span>Perla De Coss</span></p>
+
+      <!-- Redes sociales -->
+      <div class="social-bar">
+        <a ¨target=¨_blanck¨ href="https://www.facebook.com/perladecoss" class="red-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.258h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+          </svg>
+          Facebook
+        </a>
+        <a target="https://www.instagram.com/perladecoss" class="red-item">
+          <svg viewBox="0 0 24 24" fill="curr
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CARDS -->
+  <section class="cards-section">
+    <div class="section-header">
+      <h2>Mis Tareas</h2>
+      <p>Explora cada unidad del portafolio de Cultura Digital 2</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- TAREA 1: Introducción IA -->
+      <div class="card">
+        <div class="card-img-wrap">
+         
+        </div>
+        <div class="card-body">
+          <div class="card-icon">🤖</div>
+          <span class="card-num">Tarea 01</span>
+          <h3>El padre del internet</h3>
+          <p>Tim Berners Lee es considerado el padre del internet, creador de la www.
+          </p>
+          <a href="tarea1.html" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+      <!-- CARD 2: Machine Learning -->
+      <div class="card">
+         <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g1a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f8bbd0"/>
+                <stop offset="100%" stop-color="#ce93d8"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g1a)"/>
+            <!-- Circuito de fondo -->
+            <line x1="20" y1="90" x2="80" y2="90" stroke="#fff" stroke-width="1.5" stroke-opacity=".3"/>
+            <line x1="80" y1="90" x2="80" y2="50" stroke="#fff" stroke-width="1.5" stroke-opacity=".3"/>
+            <line x1="80" y1="50" x2="140" y2="50" stroke="#fff" stroke-width="1.5" stroke-opacity=".3"/>
+            <line x1="320" y1="130" x2="380" y2="130" stroke="#fff" stroke-width="1.5" stroke-opacity=".3"/>
+            <line x1="320" y1="130" x2="320" y2="90" stroke="#fff" stroke-width="1.5" stroke-opacity=".3"/>
+            <!-- Robot cabeza -->
+            <rect x="160" y="30" width="80" height="65" rx="12" fill="white" fill-opacity=".9"/>
+            <!-- Ojos -->
+            <circle cx="183" cy="57" r="10" fill="#e91e8c"/>
+            <circle cx="217" cy="57" r="10" fill="#e91e8c"/>
+            <circle cx="183" cy="57" r="5" fill="white"/>
+            <circle cx="217" cy="57" r="5" fill="white"/>
+            <circle cx="185" cy="59" r="2.5" fill="#1a1a2e"/>
+            <circle cx="219" cy="59" r="2.5" fill="#1a1a2e"/>
+            <!-- Boca -->
+            <rect x="178" y="78" width="44" height="8" rx="4" fill="#f48fb1"/>
+            <rect x="182" y="80" width="8" height="4" rx="2" fill="white"/>
+            <rect x="196" y="80" width="8" height="4" rx="2" fill="white"/>
+            <rect x="210" y="80" width="8" height="4" rx="2" fill="white"/>
+            <!-- Antena -->
+            <line x1="200" y1="30" x2="200" y2="15" stroke="white" stroke-width="2.5"/>
+            <circle cx="200" cy="11" r="5" fill="#e91e8c"/>
+            <!-- Cuerpo -->
+            <rect x="170" y="100" width="60" height="45" rx="8" fill="white" fill-opacity=".75"/>
+            <rect x="180" y="110" width="40" height="6" rx="3" fill="#f48fb1" fill-opacity=".7"/>
+            <rect x="180" y="122" width="25" height="6" rx="3" fill="#ce93d8" fill-opacity=".7"/>
+            <!-- Partículas -->
+            <circle cx="60" cy="140" r="5" fill="white" fill-opacity=".4"/>
+            <circle cx="340" cy="40" r="7" fill="white" fill-opacity=".3"/>
+            <circle cx="350" cy="150" r="4" fill="white" fill-opacity=".35"/>
+            <circle cx="30" cy="40" r="6" fill="white" fill-opacity=".3"/>
+          </svg>
+        <div class="card-img-wrap">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g2a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c5a3e8"/>
+                <stop offset="100%" stop-color="#f48fb1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g2a)"/>
+            <!-- Red neuronal -->
+            <!-- Capa 1 -->
+            <circle cx="80" cy="50"  r="12" fill="white" fill-opacity=".85"/>
+            <circle cx="80" cy="90"  r="12" fill="white" fill-opacity=".85"/>
+            <circle cx="80" cy="130" r="12" fill="white" fill-opacity=".85"/>
+            <!-- Capa 2 -->
+            <circle cx="200" cy="40"  r="12" fill="#e91e8c" fill-opacity=".9"/>
+            <circle cx="200" cy="80"  r="12" fill="#e91e8c" fill-opacity=".9"/>
+            <circle cx="200" cy="120" r="12" fill="#e91e8c" fill-opacity=".9"/>
+            <circle cx="200" cy="155" r="12" fill="#e91e8c" fill-opacity=".9"/>
+            <!-- Capa 3 -->
+            <circle cx="320" cy="65"  r="12" fill="white" fill-opacity=".85"/>
+            <circle cx="320" cy="110" r="12" fill="white" fill-opacity=".85"/>
+            <!-- Conexiones capa1-capa2 -->
+            <line x1="92" y1="50"  x2="188" y2="40"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="50"  x2="188" y2="80"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="50"  x2="188" y2="120" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="90"  x2="188" y2="40"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="90"  x2="188" y2="80"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="90"  x2="188" y2="120" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="90"  x2="188" y2="155" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="130" x2="188" y2="80"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="130" x2="188" y2="120" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="92" y1="130" x2="188" y2="155" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <!-- Conexiones capa2-capa3 -->
+            <line x1="212" y1="40"  x2="308" y2="65"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="212" y1="80"  x2="308" y2="65"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="212" y1="80"  x2="308" y2="110" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="212" y1="120" x2="308" y2="65"  stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="212" y1="120" x2="308" y2="110" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="212" y1="155" x2="308" y2="110" stroke="white" stroke-width="1" stroke-opacity=".4"/>
+            <!-- Labels -->
+            <text x="80"  y="173" text-anchor="middle" font-size="9" fill="white" fill-opacity=".7" font-family="sans-serif">Input</text>
+            <text x="200" y="173" text-anchor="middle" font-size="9" fill="white" fill-opacity=".7" font-family="sans-serif">Oculta</text>
+            <text x="320" y="173" text-anchor="middle" font-size="9" fill="white" fill-opacity=".7" font-family="sans-serif">Output</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-icon">🧠</div>
+          <span class="card-num">Tarea 02</span>
+          <h3>Lenguaje de diseño y programacion</h3>
+          <p>existen diferentes lenguajes, cada uno con un enfoque especifico,
+          existen lenguajes de diseño y maquetacion y lenguajes de programacion.</p>
+          <a href="tarea2.html" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Procesamiento del Lenguaje -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g3a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f9a8d4"/>
+                <stop offset="100%" stop-color="#a78bfa"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g3a)"/>
+            <!-- Burbuja chat izquierda -->
+            <rect x="30" y="20" width="160" height="40" rx="16" fill="white" fill-opacity=".9"/>
+            <polygon points="50,60 35,75 65,60" fill="white" fill-opacity=".9"/>
+            <rect x="44" y="33" width="80" height="7" rx="3.5" fill="#e91e8c" fill-opacity=".5"/>
+            <rect x="44" y="46" width="55" height="7" rx="3.5" fill="#ce93d8" fill-opacity=".5"/>
+            <!-- Burbuja chat derecha -->
+            <rect x="210" y="65" width="160" height="40" rx="16" fill="#e91e8c" fill-opacity=".85"/>
+            <polygon points="350,105 365,120 335,105" fill="#e91e8c" fill-opacity=".85"/>
+            <rect x="224" y="78" width="90" height="7" rx="3.5" fill="white" fill-opacity=".6"/>
+            <rect x="224" y="91" width="60" height="7" rx="3.5" fill="white" fill-opacity=".6"/>
+            <!-- Burbuja chat izquierda 2 -->
+            <rect x="30" y="120" width="180" height="40" rx="16" fill="white" fill-opacity=".85"/>
+            <polygon points="55,120 35,105 70,120" fill="white" fill-opacity=".85"/>
+            <rect x="44" y="133" width="100" height="7" rx="3.5" fill="#9c6bc4" fill-opacity=".5"/>
+            <rect x="44" y="146" width="70" height="7" rx="3.5" fill="#f48fb1" fill-opacity=".5"/>
+            <!-- Puntos decorativos -->
+            <circle cx="370" cy="30"  r="6" fill="white" fill-opacity=".3"/>
+            <circle cx="385" cy="155" r="5" fill="white" fill-opacity=".25"/>
+            <circle cx="15"  cy="160" r="7" fill="white" fill-opacity=".2"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-icon">💬</div>
+          <span class="card-num">Tarea 03</span>
+          <h3>Procesamiento del Lenguaje</h3>
+          <p>Análisis de cómo las máquinas interpretan y generan lenguaje humano con modelos actuales.</p>
+          <a href="#" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+      <!-- CARD 4: Visión por Computadora -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g4a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f48fb1"/>
+                <stop offset="100%" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g4a)"/>
+            <!-- Marco de cámara / viewfinder -->
+            <rect x="110" y="20" width="180" height="140" rx="10" fill="none" stroke="white" stroke-width="2" stroke-opacity=".5"/>
+            <!-- Esquinas de enfoque -->
+            <path d="M120,30 L120,50 M120,30 L140,30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M280,30 L280,50 M280,30 L260,30" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M120,150 L120,130 M120,150 L140,150" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M280,150 L280,130 M280,150 L260,150" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <!-- Ojo central -->
+            <ellipse cx="200" cy="90" rx="45" ry="32" fill="white" fill-opacity=".15" stroke="white" stroke-width="1.5" stroke-opacity=".6"/>
+            <circle cx="200" cy="90" r="20" fill="white" fill-opacity=".2" stroke="white" stroke-width="1.5" stroke-opacity=".7"/>
+            <circle cx="200" cy="90" r="10" fill="#e91e8c" fill-opacity=".9"/>
+            <circle cx="200" cy="90" r="4"  fill="white"/>
+            <!-- Líneas de escaneo -->
+            <line x1="130" y1="70"  x2="270" y2="70"  stroke="white" stroke-width="1" stroke-opacity=".25"/>
+            <line x1="130" y1="90"  x2="155" y2="90"  stroke="white" stroke-width="1" stroke-opacity=".25"/>
+            <line x1="245" y1="90"  x2="270" y2="90"  stroke="white" stroke-width="1" stroke-opacity=".25"/>
+            <line x1="130" y1="110" x2="270" y2="110" stroke="white" stroke-width="1" stroke-opacity=".25"/>
+            <!-- Cuadro de detección -->
+            <rect x="155" y="65" width="90" height="50" rx="4" fill="none" stroke="#f9a8d4" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <!-- Etiqueta -->
+            <rect x="155" y="56" width="55" height="14" rx="3" fill="#e91e8c" fill-opacity=".8"/>
+            <text x="182" y="66" text-anchor="middle" font-size="8" fill="white" font-family="sans-serif">objeto: 98%</text>
+            <!-- Dots decorativos -->
+            <circle cx="40"  cy="35"  r="5" fill="white" fill-opacity=".2"/>
+            <circle cx="360" cy="145" r="6" fill="white" fill-opacity=".2"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-icon">👁️</div>
+          <span class="card-num">Tarea 04</span>
+          <h3>Visión por Computadora</h3>
+          <p>Técnicas para que las máquinas reconozcan, clasifiquen e interpreten imágenes y video.</p>
+          <a href="#" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+      <!-- CARD 5: Ética en la IA -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g5a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ce93d8"/>
+                <stop offset="100%" stop-color="#f48fb1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g5a)"/>
+            <!-- Balanza -->
+            <!-- Poste central -->
+            <line x1="200" y1="30" x2="200" y2="140" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <!-- Base -->
+            <rect x="170" y="138" width="60" height="10" rx="5" fill="white" fill-opacity=".85"/>
+            <!-- Barra horizontal -->
+            <line x1="90" y1="70" x2="310" y2="70" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <!-- Cadenas izquierda -->
+            <line x1="110" y1="70" x2="100" y2="95" stroke="white" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <line x1="120" y1="70" x2="120" y2="95" stroke="white" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <!-- Platillo izquierdo -->
+            <ellipse cx="110" cy="98" rx="28" ry="8" fill="white" fill-opacity=".85"/>
+            <!-- Cadenas derecha -->
+            <line x1="280" y1="70" x2="280" y2="88" stroke="white" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <line x1="290" y1="70" x2="290" y2="88" stroke="white" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <!-- Platillo derecho -->
+            <ellipse cx="285" cy="91" rx="28" ry="8" fill="white" fill-opacity=".85"/>
+            <!-- Icono corazón en platillo izq -->
+            <path d="M103,88 C103,84 110,80 110,88 C110,80 117,84 117,88 C117,93 110,98 110,98 C110,98 103,93 103,88Z" fill="#e91e8c" fill-opacity=".8"/>
+            <!-- Icono engrane en platillo der -->
+            <circle cx="285" cy="80" r="7" fill="white" fill-opacity=".2" stroke="white" stroke-width="1.5"/>
+            <circle cx="285" cy="80" r="3" fill="white" fill-opacity=".6"/>
+            <line x1="285" y1="71" x2="285" y2="68" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="285" y1="89" x2="285" y2="92" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="276" y1="80" x2="273" y2="80" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="294" y1="80" x2="297" y2="80" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <!-- Pivot -->
+            <circle cx="200" cy="68" r="6" fill="white"/>
+            <!-- Texto -->
+            <text x="200" y="165" text-anchor="middle" font-size="10" fill="white" fill-opacity=".7" font-family="sans-serif" font-style="italic">Humano · IA · Sociedad</text>
+            <!-- Decos -->
+            <circle cx="35"  cy="30"  r="8" fill="white" fill-opacity=".15"/>
+            <circle cx="370" cy="155" r="6" fill="white" fill-opacity=".15"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-icon">⚖️</div>
+          <span class="card-num">Tarea 05</span>
+          <h3>Ética en la IA</h3>
+          <p>Reflexión crítica sobre sesgos, privacidad y el uso responsable de tecnologías inteligentes.</p>
+          <a href="#" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+      <!-- CARD 6: Proyecto Final -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="g6a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e91e8c"/>
+                <stop offset="100%" stop-color="#9c6bc4"/>
+              </linearGradient>
+              <radialGradient id="g6b" cx="50%" cy="60%">
+                <stop offset="0%"   stop-color="#fff" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="180" fill="url(#g6a)"/>
+            <ellipse cx="200" cy="130" rx="200" ry="80" fill="url(#g6b)"/>
+            <!-- Cohete -->
+            <g transform="translate(200,90) rotate(-30)">
+              <!-- Cuerpo -->
+              <ellipse cx="0" cy="0" rx="16" ry="38" fill="white" fill-opacity=".92"/>
+              <!-- Punta -->
+              <ellipse cx="0" cy="-38" rx="16" ry="14" fill="#e91e8c" fill-opacity=".9"/>
+              <!-- Ventana -->
+              <circle cx="0" cy="-8" r="9" fill="#9c6bc4" fill-opacity=".7" stroke="white" stroke-width="1.5"/>
+              <circle cx="0" cy="-8" r="5" fill="white" fill-opacity=".3"/>
+              <!-- Aletas -->
+              <polygon points="-16,25 -28,45 -6,32" fill="white" fill-opacity=".75"/>
+              <polygon points="16,25  28,45  6,32"  fill="white" fill-opacity=".75"/>
+              <!-- Llama -->
+              <ellipse cx="0" cy="46" rx="9" ry="15" fill="#ffd54f" fill-opacity=".9"/>
+              <ellipse cx="0" cy="50" rx="5" ry="10" fill="#fff" fill-opacity=".6"/>
+            </g>
+            <!-- Estrellas -->
+            <circle cx="50"  cy="25"  r="2.5" fill="white" fill-opacity=".8"/>
+            <circle cx="90"  cy="55"  r="1.5" fill="white" fill-opacity=".6"/>
+            <circle cx="340" cy="20"  r="2"   fill="white" fill-opacity=".8"/>
+            <circle cx="370" cy="60"  r="1.5" fill="white" fill-opacity=".6"/>
+            <circle cx="30"  cy="100" r="1.5" fill="white" fill-opacity=".5"/>
+            <circle cx="360" cy="100" r="2"   fill="white" fill-opacity=".5"/>
+            <circle cx="130" cy="150" r="1.5" fill="white" fill-opacity=".4"/>
+            <circle cx="280" cy="155" r="2"   fill="white" fill-opacity=".4"/>
+            <!-- Orbita -->
+            <ellipse cx="200" cy="90" rx="75" ry="30" fill="none" stroke="white" stroke-width="1" stroke-opacity=".25" stroke-dasharray="6,4"/>
+            <!-- Texto -->
+            <text x="200" y="168" text-anchor="middle" font-size="10" fill="white" fill-opacity=".7" font-family="sans-serif" font-style="italic">¡Al siguiente nivel!</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-icon">🚀</div>
+          <span class="card-num">Tarea 06</span>
+          <h3>Proyecto Final</h3>
+          <p>Integración de todos los conocimientos adquiridos en un proyecto de inteligencia artificial aplicado.</p>
+          <a href="#" class="btn-ver">Ver Tareas</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <div class="footer-logo">✦ Portafolio Digital ✦</div>
+
+    <div class="footer-grid">
+      <div class="footer-item">
+        <span class="fi-label">Escuela</span>
+        <span class="fi-value">Centro de Bachillerato Tecnológico Industrial y de Servicios 144</span>
+      </div>
+      <div class="footer-item">
+        <span class="fi-label">Especialidad</span>
+        <span class="fi-value">Inteligencia Artificial</span>
+      </div>
+      <div class="footer-item">
+        <span class="fi-label">Creadora</span>
+        <span class="fi-value">Perla De Coss</span>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+    <p class="footer-copy">© 2025 · Cultura Digital 2 · Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
